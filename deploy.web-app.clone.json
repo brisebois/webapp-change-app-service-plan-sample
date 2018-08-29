@@ -1,0 +1,33 @@
+{
+    "resources": [
+        {
+            "name": "[parameters('DSN_PREFIX')]",
+            "type": "Microsoft.Web/sites",
+            "properties": {
+                "cloningInfo": {
+                    "SourceWebAppId": "[parameters('SOURCE_WEB_APP_ID')]",
+                    "CloneSourceControl": true,
+                    "CloneCustomHostNames": true
+                },
+                "name": "[parameters('DSN_PREFIX')]",
+                "serverFarmId": "[parameters('ASP_ID')]",
+                "hostingEnvironment": ""
+            },
+            "apiVersion": "2016-03-01",
+            "location": "[resourceGroup().location]"
+        }
+    ],
+    "parameters": {
+        "ASP_ID": {
+            "type": "string"
+        },
+        "DSN_PREFIX":{
+            "type": "string"
+        },
+        "SOURCE_WEB_APP_ID":{
+            "type": "string"
+        }
+    },
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0"
+}

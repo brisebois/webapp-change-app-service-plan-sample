@@ -1,0 +1,44 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "ASP_NAME": {
+           "type": "string",
+           "metadata": {
+                "description": "App Service Plan Name"
+            }
+        },
+        "ASP_SKU": {
+            "type": "string",
+            "defaultValue": "F1",
+            "metadata": {
+                 "description": "App Service Plan SKU"
+             }
+         }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "apiVersion": "2016-09-01",
+            "name": "[parameters('ASP_NAME')]",
+            "type": "Microsoft.Web/serverfarms",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "[parameters('ASP_SKU')]",
+                "capacity": 1
+            },
+            "tags": {
+                "displayName": "[parameters('ASP_NAME')]"
+            },
+            "properties": {
+                "name": "[parameters('ASP_NAME')]"
+            }
+        }
+    ],
+    "outputs": {
+        "asp_id": {
+           "type": "string",
+           "value": "[resourceId('Microsoft.Web/serverfarms', parameters('ASP_NAME'))]"
+        }
+    }
+}
